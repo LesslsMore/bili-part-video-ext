@@ -1,0 +1,36 @@
+{
+  "name": "bili-part-video-ext",
+  "description": "manifest.json description",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "compile": "vue-tsc --noEmit",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "dexie": "^4.0.8",
+    "element-plus": "^2.7.7",
+    "exceljs": "^4.4.0",
+    "file-saver": "^2.0.5",
+    "md5": "^2.3.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.31",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.5",
+    "@wxt-dev/module-vue": "^1.0.0",
+    "sass": "^1.77.8",
+    "typescript": "^5.5.2",
+    "vue-tsc": "^2.0.22",
+    "wxt": "^0.18.10"
+  }
+}
