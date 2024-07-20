@@ -11,6 +11,9 @@ dependencies:
   dexie:
     specifier: ^4.0.8
     version: 4.0.8
+  dexie-export-import:
+    specifier: ^4.1.2
+    version: 4.1.2(dexie@4.0.8)
   element-plus:
     specifier: ^2.7.7
     version: 2.7.7(vue@3.4.31)
@@ -1780,6 +1783,14 @@ packages:
   /destr@2.0.3:
     resolution: {integrity: sha512-2N3BOUU4gYMpTP24s5rF5iP7BDr7uNTCs4ozw3kf/eKfvWSIu93GEBi5m427YoyJoeOzQ5smuu4nNAPGb8idSQ==}
     dev: true
+
+  /dexie-export-import@4.1.2(dexie@4.0.8):
+    resolution: {integrity: sha512-dWIkkajX+CsEJ19xMnvyqUDlldIl7jW/G49hy3pXZeIgCei9fPeGSjteoh7BeTujexIM3XZ+uAGCEwgCx2HAsQ==}
+    peerDependencies:
+      dexie: ^2.0.4 || ^3.0.0 || ^4.0.1-alpha.5
+    dependencies:
+      dexie: 4.0.8
+    dev: false
 
   /dexie@4.0.8:
     resolution: {integrity: sha512-1G6cJevS17KMDK847V3OHvK2zei899GwpDiqfEXHP1ASvme6eWJmAp9AU4s1son2TeGkWmC0g3y8ezOBPnalgQ==}

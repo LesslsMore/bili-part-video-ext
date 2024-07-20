@@ -14,13 +14,14 @@ export function get_pn() {
     return pn
 }
 
-export function get_bvids() {
+export function get_vlist() {
     let items = document.querySelectorAll(".small-item.fakeDanmu-item")
-    let bvids = {}
+    let vlist = []
     items.forEach(item => {
-        bvids[item.dataset.aid] = 1
+        // console.log(item)
+        vlist.push({bvid: item.dataset.aid})
     })
-    return bvids
+    return vlist
 }
 
 export function mid_map2tree(id_map) {
@@ -44,17 +45,7 @@ export function bvid_obj2list(bvid_obj) {
     })
 }
 
-export function page_json2item(json_obj) {
-    let vlist = json_obj.data.list.vlist
-    let mid = vlist[0].mid
-    let bvids = new Set()
-    vlist.forEach(el => {
-        bvids.add(el.bvid)
-    });
-    return {mid, bvids}
-}
-
-export function bvid_json2item(obj) {
+export function bvid2cids(obj) {
     const bvid = obj.data.bvid
     // https://www.bilibili.com/video/BV19K4y1L7MT?p=57
     let item_info = []
@@ -68,7 +59,7 @@ export function bvid_json2item(obj) {
 
             let page = el.page
             let cid = el.cid
-            let part = el.part
+            let part = {text: el.part, hyperlink: url}
             let duration = el.duration
 
             item_info.push({

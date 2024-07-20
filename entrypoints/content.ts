@@ -1,4 +1,4 @@
-import {get_bvids, get_mid, get_pn} from "@/src/utils/bili";
+import {get_bvids, get_mid, get_pn, get_vlist} from "@/src/utils/bili";
 
 export default defineContentScript({
     matches: ['*://space.bilibili.com/*/video'],
@@ -21,14 +21,15 @@ export default defineContentScript({
 
             chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 // console.log(sender.tab ?"from a content script:" + sender.tab.url :"from the extension");
-                if (request.cmd == 'test') {
-                    alert(request.value);
-
+                if (request.cmd === 'addmid') {
+                    console.log('content.ts...')
+                    // alert(request.value);
                     let pn = get_pn()
                     sendResponse({mid, pn});
-                } else if (request.cmd === 'bvid') {
-                    let bvids = get_bvids()
-                    sendResponse({mid, bvids});
+                } else if (request.cmd === 'get_vlist') {
+                    console.log('content.ts...')
+                    let vlist = get_vlist()
+                    sendResponse(vlist);
                 } else if (request.cmd === 'fetchData') {
                     fetch(request.val)
                         .then((response) => response.json())

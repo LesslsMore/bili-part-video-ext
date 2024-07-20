@@ -17,6 +17,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "dexie": "^4.0.8",
+    "dexie-export-import": "^4.1.2",
     "element-plus": "^2.7.7",
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
