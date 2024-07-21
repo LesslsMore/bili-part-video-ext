@@ -16,11 +16,26 @@ async function export_excel() {
     });
 
     console.log(res.length)
-    const keys = ['name', 'mid', 'bvid', 'cid', 'url', 'page', 'view', 'duration', 'part']; // 指定字段的顺序
-    const widths = [10, 10, 12, 10, 45, 4, 8, 8, 45]
+
+    // 指定字段的顺序
+    const keys = {
+        'name': 10,
+        'title': 45,
+        'part': 45,
+        'page': 4,
+        'view': 8,
+        'duration': 8,
+
+        'mid': 10,
+        'bvid': 12,
+        'cid': 10,
+        'url': 45
+    }
+
     const columns = []
-    for (let i = 0; i < keys.length; i++) {
-        columns.push({header: keys[i], key: keys[i], width: widths[i] * 1.2})
+    for (const [header, width] of Object.entries(keys)) {
+        // console.log(header, width)
+        columns.push({header, key: header, width: width * 1.2})
     }
     await exportToExcel(res, db_name, tb_name, columns)
     console.log(new Date())

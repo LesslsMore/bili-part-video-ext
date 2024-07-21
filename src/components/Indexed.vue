@@ -14,22 +14,23 @@
 
 
   <el-table :data="tableData" border style="width: 100%" @sort-change="sort_data">
-    <el-table-column sortable prop="name" label="name" width="100"
-                     :filters="[
-        { text: 'Home', value: 'Home' },
-        { text: 'Office', value: 'Office' },
-      ]"
-                     :filter-method="filterTag"
-                     filter-placement="bottom-end"
+    <el-table-column
+        sortable="custom"
+        v-for="([head, width], index) in Object.entries(keys)"
+        :key="index"
+        :prop="head"
+        :label="head"
+        :width="width * 10"
     />
-    <el-table-column sortable="custom" prop="mid" label="mid" width="100"/>
-    <el-table-column sortable prop="bvid" label="bvid" width="150"/>
-    <el-table-column sortable prop="cid" label="cid" width="100"/>
-    <el-table-column sortable prop="url" label="url" width="350"/>
-    <el-table-column sortable prop="page" label="page" width="100"/>
-    <el-table-column sortable prop="view" label="view" width="100"/>
-    <el-table-column sortable prop="duration" label="duration" width="100"/>
-    <el-table-column sortable prop="part.text" label="part" width="350"/>
+
+    <!--    <el-table-column sortable prop="name" label="name" width="100"-->
+    <!--                     :filters="[-->
+    <!--        { text: 'Home', value: 'Home' },-->
+    <!--        { text: 'Office', value: 'Office' },-->
+    <!--      ]"-->
+    <!--                     :filter-method="filterTag"-->
+    <!--                     filter-placement="bottom-end"-->
+    <!--    />-->
   </el-table>
 
   <el-pagination v-model:current-page="currentPage4" v-model:page-size="pageSize4"
@@ -61,6 +62,22 @@ let searchObj = ref({
   bvid: '',
   part: '',
 })
+
+let keys = ref(
+    {
+      'name': 10,
+      'title.text': 45,
+      'part.text': 45,
+      'page': 8,
+      'view': 8,
+      'duration': 10,
+
+      'mid': 10,
+      'bvid': 12,
+      'cid': 11,
+      'url': 38,
+    }
+)
 
 function sort_data({prop, order}) {
   console.log(prop, order)
