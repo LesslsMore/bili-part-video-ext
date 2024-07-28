@@ -45,7 +45,7 @@
 
 import {reactive, ref} from 'vue'
 import {Delete, Edit, Search, Refresh, Share, Upload, Download} from '@element-plus/icons-vue'
-import {db_name_bili, db_obj} from "@/src/utils/db.js";
+import {db_bili} from "@/src/utils/db.js";
 
 const searchObjRef = ref()
 
@@ -89,7 +89,7 @@ async function fetchData() {
 
 async function filter(word, page, limit) {
   console.log(word)
-  const collection = db_obj[db_name_bili].cids
+  const collection = db_bili.cids
       .orderBy('view')
       .filter(item => {
         try {

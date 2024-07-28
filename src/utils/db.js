@@ -23,7 +23,6 @@ const db_schema_json = {
 }
 
 mids.forEach(mid => {
-    // db_obj[mid] = get_db(mid, db_schemas)
     let schema = `pages[${mid}]`
     db_schema_json[schema] = '&pn'
 })
