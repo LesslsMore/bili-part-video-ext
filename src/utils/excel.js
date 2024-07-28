@@ -1,11 +1,11 @@
 import ExcelJS from "exceljs";
-import {db_name, db_obj} from "@/src/utils/db.js";
+import {db_bili} from "@/src/utils/db.js";
 
 async function export_excel() {
     let tb_name = 'cids'
     console.log('export_excel...')
     console.log(new Date())
-    const res = await db_obj[db_name][tb_name].toArray();
+    const res = await db_bili[tb_name].toArray();
 
     res.sort((a, b) => {
         if (a.view != b.view) {
@@ -37,11 +37,11 @@ async function export_excel() {
         // console.log(header, width)
         columns.push({header, key: header, width: width * 1.2})
     }
-    await exportToExcel(res, db_name, tb_name, columns)
+    await exportToExcel(res, tb_name, columns)
     console.log(new Date())
 }
 
-async function exportToExcel(jsonData, db_name, tb_name, columns) {
+async function exportToExcel(jsonData, tb_name, columns) {
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet(tb_name);
 
@@ -57,7 +57,7 @@ async function exportToExcel(jsonData, db_name, tb_name, columns) {
     // 生成 Excel 文件并下载
     const buffer = await workbook.xlsx.writeBuffer();
     const blob = new Blob([buffer], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
-    saveAs(blob, `${db_name}.xlsx`);
+    saveAs(blob, `${db_bili.name}.xlsx`);
 }
 
 
@@ -71,7 +71,7 @@ async function import_excel(_, file) {
 
 async function importToIndexedDB(excel_json) {
     for (const [key, value] of Object.entries(excel_json)) {
-        await db_obj[db_name][key].bulkPut(value)
+        await db_bili[key].bulkPut(value)
     }
 }
 

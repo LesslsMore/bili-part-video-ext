@@ -2,28 +2,39 @@ import Dexie from 'dexie'
 import {exportDB, importDB} from "dexie-export-import"
 import {saveAs} from 'file-saver'
 
-const db_name = 'bili'
+const db_name_bili = 'bili'
+const db_name_json = 'json'
 
-const db_schema = {
+const db_schema_bili = {
     vlist: '&bvid, mid',
-    bvids: '&bvid',
     cids: '&cid, bvid, mid, view', // 主键 索引
+    // bvids: '&bvid',
 }
 
-const db_names = [37974444, 302417610]
+const mids = [37974444, 302417610]
 
 // 原始数据
-const db_schemas = {
-    pages: '&pn',
+// const db_schemas = {
+//     pages: '&pn',
+// }
+
+const db_schema_json = {
+    bvids: '&bvid',
 }
+
+mids.forEach(mid => {
+    // db_obj[mid] = get_db(mid, db_schemas)
+    let schema = `pages[${mid}]`
+    db_schema_json[schema] = '&pn'
+})
+
+const db_bili = get_db(db_name_bili, db_schema_bili)
+const db_json = get_db(db_name_json, db_schema_json)
 
 const db_obj = {
-    [db_name]: get_db(db_name, db_schema)
+    [db_name_bili]: db_bili,
+    [db_name_json]: db_json,
 }
-
-db_names.forEach(mid => {
-    db_obj[mid] = get_db(mid, db_schemas)
-})
 
 function get_db(db_name, db_schema, db_ver = 1) {
     let db = new Dexie(db_name)
@@ -56,4 +67,4 @@ async function import_db(_, file) {
     console.log(new Date())
 }
 
-export {get_db, export_db, import_db, db_name, db_schema, db_names, db_schemas, db_obj}
+export {get_db, export_db, import_db, db_bili, db_json}

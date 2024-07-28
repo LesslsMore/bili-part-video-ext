@@ -15,7 +15,7 @@ import {sendMessageToContentScript} from "@/src/utils/content.js";
 
 import {useTreeStore} from '@/src/stores/tree.js';
 import {get_save_mid_up} from "@/src/utils/bili.js";
-import {db_name, db_obj} from "@/src/utils/db.js";
+import {db_name_bili, db_obj} from "@/src/utils/db.js";
 
 const treeStore = useTreeStore();
 
@@ -37,10 +37,10 @@ function get_vlist() {
   sendMessageToContentScript({cmd: 'get_vlist'},
       async (vlist) => {
         console.log('来自content的回复: ', vlist);
-        const existingKeys = await db_obj[db_name].vlist.orderBy('bvid').primaryKeys();
+        const existingKeys = await db_obj[db_name_bili].vlist.orderBy('bvid').primaryKeys();
         const newDataList = vlist.filter(item => !existingKeys.includes(item.bvid));
         console.log(newDataList.length)
-        await db_obj[db_name].vlist.bulkAdd(newDataList)
+        await db_obj[db_name_bili].vlist.bulkAdd(newDataList)
       });
 }
 
